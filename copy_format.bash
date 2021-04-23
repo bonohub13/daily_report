@@ -4,6 +4,11 @@ DATE=`LANG="en_US.UTF-8" date | sed -r "s/[^ ]+ +([^ ]+)+ +([^ ]+)+ +[^ ]+ +[^ ]
 # directory you want to store your daily reports
 ## $HOME/Documents is the path set by default.
 ## If you want something different feel free to change it to whatever you'd like
+SOURCE_PATH="NULL"
+if [[ ! -d ${SOURCE_PATH} ]]; then
+    echo "ERROR: SOURCE_PATH not set to valid directory path"
+    echo "Set \$SOURCE_PATH to the path of the directory where \"daily_report\" is"
+    echo "Example) SOURCE_PATH=/home/user/daily_report"
 FILE_PATH=$HOME/Documents
 
 # create new directory if it doesn't exist
