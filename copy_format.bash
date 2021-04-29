@@ -6,7 +6,7 @@ DATE=`LANG="en_US.UTF-8" date | sed -r "s/[^ ]+ +([^ ]+)+ +([^ ]+)+ +[^ ]+ +[^ ]
 ## If you want something different feel free to change it to whatever you'd like
 SOURCE_PATH="/home/kensuke/Documents/.ats/training/daily_report"
 
-if [[ ! -d ${SOURCE_PATH} -o ${SOURCE_PATH} = "NULL" ]]; then
+if [[ ! -d ${SOURCE_PATH} ]] || [[ ${SOURCE_PATH} = "NULL" ]]; then
     echo "ERROR: SOURCE_PATH not set to valid directory path"
     echo "Set \$SOURCE_PATH to the path of the directory where \"daily_report\" is"
     echo "Example) SOURCE_PATH=/home/user/daily_report"
