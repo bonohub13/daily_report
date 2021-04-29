@@ -4,12 +4,15 @@ DATE=`LANG="en_US.UTF-8" date | sed -r "s/[^ ]+ +([^ ]+)+ +([^ ]+)+ +[^ ]+ +[^ ]
 # directory you want to store your daily reports
 ## $HOME/Documents is the path set by default.
 ## If you want something different feel free to change it to whatever you'd like
-SOURCE_PATH="NULL"
-if [[ ! -d ${SOURCE_PATH} ]]; then
+SOURCE_PATH="/home/kensuke/Documents/.ats/training/daily_report"
+
+if [[ ! -d ${SOURCE_PATH} -o ${SOURCE_PATH} = "NULL" ]]; then
     echo "ERROR: SOURCE_PATH not set to valid directory path"
     echo "Set \$SOURCE_PATH to the path of the directory where \"daily_report\" is"
     echo "Example) SOURCE_PATH=/home/user/daily_report"
-FILE_PATH=$HOME/Documents
+fi
+
+FILE_PATH="/home/kensuke/Documents/.ats/training/daily_report"
 
 # create new directory if it doesn't exist
 init_filepath()
@@ -31,7 +34,7 @@ get_month()
 
     for i in `seq 0 11`; do
         if [ "$(echo $1 | grep -i ${MON[${i}]})" != "" ]; then
-            echo $1 | sed "s/${MON[$i]}/${MON_NUM[$i]}/"
+            output=`echo $1 | sed "s/${MON[$i]}/${MON_NUM[$i]}/"`
         fi
     done
 
@@ -44,7 +47,8 @@ main()
     init_filepath $2
     DATE=`get_month $1`
     FILENAME="$DATE.md"
-    sed "s/年月日/${DATE:0:4}年${DATE:4:2}月${DATE:6:2}日/" $2/format.md | tee $2/$FILENAME
+    sed "s/年月日/${DATE:0:4}年${DATE:4:2}月${DATE:6:2}日/" $SOURCE_PATH/format.md | tee $2/$FILENAME
 }
 
 main $DATE $FILE_PATH
+
