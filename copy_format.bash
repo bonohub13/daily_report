@@ -12,7 +12,7 @@ if [[ ! -d ${SOURCE_PATH} ]] || [[ ${SOURCE_PATH} = "NULL" ]]; then
     echo "Example) SOURCE_PATH=/home/user/daily_report"
 fi
 
-FILE_PATH="~/Documents"
+FILE_PATH=~/Documents
 
 # create new directory if it doesn't exist
 init_filepath()
@@ -47,7 +47,11 @@ main()
     init_filepath $2
     DATE=`get_month $1`
     FILENAME="$DATE.md"
-    sed "s/年月日/${DATE:0:4}年${DATE:4:2}月${DATE:6:2}日/" $SOURCE_PATH/format.md | tee $2/$FILENAME
+    DD=${DATE:6:2}
+    if [[ $(($DD)) -lt "10" ]];then
+        DD="0$DD"
+    fi
+    sed "s/年月日/${DATE:0:4}年${DATE:4:2}月${DD}日/" $SOURCE_PATH/format.md | tee $2/$FILENAME
 }
 
 main $DATE $FILE_PATH
