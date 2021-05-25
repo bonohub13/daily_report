@@ -4,15 +4,15 @@ convert() {
     title=$1
     filename=`echo $title | sed "s/md$/html/"`
     top="\
-<!DOCTYPE html>\n\
-<html>\n\
-  <head>\n\
-    <meta charset=\"UTF-8\">\n\
-    <title>$title</title>\n\
-  </head>\n\
+<!DOCTYPE html>\
+<html>\
+  <head>\
+    <meta charset=\"UTF-8\">\
+    <title>$title</title>\
+  </head>\
   <body>"
     bottom="\
-  </body>\n\
+  </body>\
 </html>"
 
     echo "$top" > $filename
