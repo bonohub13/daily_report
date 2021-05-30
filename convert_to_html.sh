@@ -4,23 +4,23 @@ convert() {
     title=$1
     filename=`echo $title | sed "s/md$/html/"`
     top="\
-<!DOCTYPE html>\
-<html>\
-  <head>\
-    <meta charset=\"UTF-8\">\
-    <title>$title</title>\
-  </head>\
+<!DOCTYPE html>\n\
+<html>\n\
+  <head>\n\
+    <meta charset=\n\"UTF-8\">\
+    <title>$title</title>\n\
+  </head>\n\
   <body>"
     bottom="\
-  </body>\
+  </body>\n\
 </html>"
 
-    echo "$top" > $filename
+    echo -e "$top" > $filename
     pandoc $title | while read line
     do
         echo "$(printf ' %0.s' `seq 1 4`)$line" >> $filename
     done
-    echo $bottom >> $filename
+    echo -e "$bottom" >> $filename
 
     less $filename
 }
